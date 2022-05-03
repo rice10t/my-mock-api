@@ -1,5 +1,10 @@
 # my-mock-api
 
+```
+npm install
+node app.js
+```
+
 ## Example
 
 ```
