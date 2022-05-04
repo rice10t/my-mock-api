@@ -1,6 +1,5 @@
 const express = require('express')
 const app = express()
-const port = 3333
 
 app.use(express.json())
 
@@ -12,7 +11,7 @@ app.all('/*', async (req, res) => {
   if (delayMillis > (5 * 60 * 1000)) {
     throw new Error("delay time must be lower than 5 minutes")
   }
-  if(req.method === "OPTIONS"){
+  if (req.method === "OPTIONS") {
     delayMillis = 0;
   }
 
@@ -25,11 +24,6 @@ app.all('/*', async (req, res) => {
   res.json(response)
 })
 
-
-app.listen(port, () => {
-  console.log(`Example app listening on port ${port}`)
-})
-
 function delay(millis) {
   return new Promise(resolve => {
     setTimeout(() => {
@@ -37,3 +31,9 @@ function delay(millis) {
     }, millis)
   })
 }
+
+const port = process.argv[2] != null ? +process.argv[2] : 3000
+
+app.listen(port, () => {
+  console.log(`Example app listening on port ${port}`)
+})
