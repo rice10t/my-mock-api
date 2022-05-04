@@ -8,10 +8,14 @@ app.all('/*', async (req, res) => {
   console.log(req.body)
   const response = req.body?.response
 
-  const delayMillis = +req.query.delay
+  let delayMillis = +req.query.delay
   if (delayMillis > (5 * 60 * 1000)) {
     throw new Error("delay time must be lower than 5 minutes")
   }
+  if(req.method === "OPTIONS"){
+    delayMillis = 0;
+  }
+
   await delay(delayMillis)
 
   res.header("Access-Control-Allow-Origin", "*")
